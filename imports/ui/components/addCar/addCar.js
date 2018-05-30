@@ -1,5 +1,10 @@
 import './addCar.html';
-import { Markers, Pos } from '/imports/api/cars/cars.js';
+import { Markers, Pos, Books } from '/imports/api/cars/cars.js';
+
+Template.info.onCreated(function () {
+  Meteor.subscribe('books.all');
+  //Meteor.subscribe('markers.all');
+});
 
 Template.spot.helpers({
     spot: function () {

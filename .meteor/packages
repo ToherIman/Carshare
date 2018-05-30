@@ -26,7 +26,8 @@ johanbrook:publication-collector  # Test a Meteor publication by collecting its 
 dburles:google-maps
 mdg:geolocation
 session
-yogiben:autoform-map
 accounts-password
 accounts-ui
 themeteorchef:bert
+aldeed:autoform
+aldeed:collection2
