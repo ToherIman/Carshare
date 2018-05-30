@@ -2,11 +2,6 @@ import { Links } from '/imports/api/cars/cars.js';
 import { Meteor } from 'meteor/meteor';
 import './info.html';
 
-Template.info.onCreated(function () {
-  Meteor.subscribe('links.all');
-  Meteor.subscribe('markers.all');
-});
-
 Template.info.helpers({
   links() {
     return Links.find({});

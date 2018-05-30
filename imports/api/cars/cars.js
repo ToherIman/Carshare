@@ -1,8 +1,7 @@
 import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
 SimpleSchema.extendOptions(['autoform']);
-
-export const Markers = new Mongo.Collection('markers');  
+let Markers = new Mongo.Collection('markers');  
 export const Pos = new Mongo.Collection('pos');
 
 Markers.allow({
@@ -17,31 +16,31 @@ Pos.allow({
     remove() { return true; },
 });
 
-Books = new Mongo.Collection("books");
-Books.attachSchema(new SimpleSchema({
+//Books = new Mongo.Collection("books");
+Markers.attachSchema(new SimpleSchema({
+  lat: {
+      type: Number,
+      optional: true,
+  },
+  lng: {
+    type: Number,
+    optional: true,
+},
+user: {
+    type: String,
+    optional:true,
+    label: "User"
+},
+editing: {
+    type: Boolean,
+    optional: true
+},
   title: {
     type: String,
     label: "Title",
-    max: 200
-  },
-  author: {
-    type: String,
-    label: "Author"
-  },
-  copies: {
-    type: Number,
-    label: "Number of copies",
-    min: 0
-  },
-  lastCheckedOut: {
-    type: Date,
-    label: "Last date this book was checked out",
-    optional: true
-  },
-  summary: {
-    type: String,
-    label: "Brief summary",
+    max: 200,
     optional: true,
-    max: 1000
-  }
+  },
 }, { tracker: Tracker }));
+
+export { Markers };

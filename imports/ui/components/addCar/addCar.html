@@ -1,9 +1,33 @@
 <template name="spot">
-    {{> quickForm collection="Books" id="insertBookForm" type="insert"}}
+   
+    {{#autoForm collection=makerCollection id="insertCarForm" type="insert"}}
+    <fieldset>
+      <legend>Add a Book</legend>
+      {{> afQuickField name='title'}}
+      {{> afQuickField name='lat' value=carInfo.lat}}
+      {{> afQuickField name='lng' value=carInfo.lng}}
+      <!--
+      {{> afQuickField name='copies'}}
+      {{> afQuickField name='lastCheckedOut'}}
+      <div class="form-group{{#if afFieldIsInvalid name='cost'}} has-error{{/if}}">
+        <div class="input-group">
+          <span class="input-group-addon">$</span>
+          {{> afFieldInput name='cost'}}
+          <span class="input-group-addon">/each</span>
+        </div>
+        {{#if afFieldIsInvalid name='cost'}}
+        <span class="help-block">{{afFieldMessage name='cost'}}</span>
+        {{/if}}
+      </div>
+       -->
+    </fieldset>
+    <button type="submit" class="btn btn-primary">Insert</button>
+    {{/autoForm}}
 </template>
 
 
 <!--
+   {{> quickForm collection=makerCollection id="insertCarForm" type="insert"}}
       <p>
           <p>
             Spot Info

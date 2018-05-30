@@ -12,7 +12,7 @@ Template.map.onCreated(function() {
     Meteor.subscribe('markers.all');
     GoogleMaps.ready('map', function(map) {
         let marker;
-    
+      
         Markers.find().observe(function () {
           let latLng = Geolocation.latLng();
           const userId = Meteor.userId();
@@ -51,8 +51,23 @@ Template.map.onCreated(function() {
         });
     
         google.maps.event.addListener(map.instance, 'click', function(event) {
+          const carInfo = { lat: event.latLng.lat(), 
+                            lng: event.latLng.lng(), 
+                            user: Meteor.userId() };
+          Session.set('carInfo', carInfo);
+          let marker = new google.maps.Marker({
+            draggable: true,
+            animation: google.maps.Animation.DROP,
+            position: new google.maps.LatLng(event.latLng.lat(), event.latLng.lng()),
+            label: "THIS",
+            //icon: 'img/car.png',
+            map: map.instance,
+            id: document._id
+          });
+          /*
           Markers.insert({ lat: event.latLng.lat(), lng: event.latLng.lng(), user: Meteor.userId() }, function(err, res) {
             if(err) {
+              console.log('err', err);
               Bert.alert({
                 title: 'Error',
                 message: err.reason,
@@ -63,17 +78,18 @@ Template.map.onCreated(function() {
               Session.set('place', res);
             }
           });
+          */
         });
     
         var markers = {};
-    
+        
         Markers.find().observe({
           added (document) {
             let marker = new google.maps.Marker({
               draggable: true,
               animation: google.maps.Animation.DROP,
               position: new google.maps.LatLng(document.lat, document.lng),
-              label: 'S',
+              //label: "",
               icon: 'img/car.png',
               map: map.instance,
               id: document._id
@@ -84,8 +100,15 @@ Template.map.onCreated(function() {
             });
     
             google.maps.event.addListener(marker, 'click', function(event) {
+              console.log('marker', marker.position.lat(), marker.position.lng());
               let selectedMarker = marker.id;
               Session.set('place', marker.id);
+              const carInfo = { 
+                lat: marker.position.lat(), 
+                lng: marker.position.lng(), 
+                user: Meteor.userId() 
+                };
+              Session.set('carInfo', carInfo);
             });
             markers[document._id] = marker;
           },

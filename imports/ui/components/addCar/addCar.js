@@ -1,15 +1,26 @@
 import './addCar.html';
 import { Markers, Pos, Books } from '/imports/api/cars/cars.js';
 
-Template.info.onCreated(function () {
-  Meteor.subscribe('books.all');
-  //Meteor.subscribe('markers.all');
+Template.spot.onCreated(function () {
+  //Meteor.subscribe('books.all');
+  Meteor.subscribe('markers.all');
 });
 
+Template.spot.onRendered(function () {
+  
+})
+
+
 Template.spot.helpers({
+    makerCollection: function() {
+      return Markers;
+    },
     spot: function () {
       return Markers.findOne(Session.get('place'));
-    }
+    },
+    carInfo: function() {
+      return Session.get('carInfo');
+    },
   });
   
   Template.spot.events({
