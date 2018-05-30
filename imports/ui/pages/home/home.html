@@ -1,11 +1,15 @@
 <template name="App_home">
-  <div style="display: flex; flex-flow: row-reverse; margin-right: 17vw">
-    <div>
-        {{> loginButtons}}
+  <div class="container">
+    <div class="row">
+          {{> loginButtons}}
     </div>
-  </div>
-  <div style="display: inline-flex; justify-content: space-between">
-      {{> map}}
-      {{> spot}}
+    <div class="row">
+      <div class="col-sm">
+          {{> map}}
+      </div>
+      <div class="col-sm-4">
+          {{> add}}
+      </div>
+    </div>
   </div>
 </template>
