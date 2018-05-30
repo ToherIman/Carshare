@@ -1,8 +1,8 @@
 // All links-related publications
 
 import { Meteor } from 'meteor/meteor';
-import { Links } from '../links.js';
-import { Markers } from '../links.js';
+import { Links } from '../cars';
+import { Markers } from '../cars';
 
 Meteor.publish('links.all', function () {
   return Links.find();

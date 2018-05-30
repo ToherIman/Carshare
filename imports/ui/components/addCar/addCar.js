@@ -1,5 +1,5 @@
 import './addCar.html';
-import { Markers, Pos } from '/imports/api/links/links.js';
+import { Markers, Pos } from '/imports/api/cars/cars.js';
 
 Template.spot.helpers({
     spot: function () {

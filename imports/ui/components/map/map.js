@@ -1,6 +1,6 @@
 import './map.html';
 import '../../stylesheets/map.less';
-import { Markers, Pos } from '/imports/api/links/links.js';
+import { Markers, Pos } from '/imports/api/cars/cars.js';
 
 var MAP_ZOOM = 15;
 
