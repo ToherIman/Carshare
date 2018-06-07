@@ -1,41 +1,26 @@
 <template name="add">
-    
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text" id="basic-addon1">@</span>
+   
+    {{#autoForm collection=makerCollection id="insertCarForm" type="insert"}}
+    <fieldset>
+      <legend>Add a Book</legend>
+      {{> afQuickField name='title'}}
+      {{> afQuickField name='lat' value=carInfo.lat}}
+      {{> afQuickField name='lng' value=carInfo.lng}}
+      <!--
+      {{> afQuickField name='copies'}}
+      {{> afQuickField name='lastCheckedOut'}}
+      <div class="form-group{{#if afFieldIsInvalid name='cost'}} has-error{{/if}}">
+        <div class="input-group">
+          <span class="input-group-addon">$</span>
+          {{> afFieldInput name='cost'}}
+          <span class="input-group-addon">/each</span>
         </div>
-        <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+        {{#if afFieldIsInvalid name='cost'}}
+        <span class="help-block">{{afFieldMessage name='cost'}}</span>
+        {{/if}}
       </div>
-      
-      <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
-        <div class="input-group-append">
-          <span class="input-group-text" id="basic-addon2">@example.com</span>
-        </div>
-      </div>
-      
-      <label for="basic-url">Your vanity URL</label>
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text" id="basic-addon3">https://example.com/users/</span>
-        </div>
-        <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
-      </div>
-      
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text">$</span>
-        </div>
-        <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
-        <div class="input-group-append">
-          <span class="input-group-text">.00</span>
-        </div>
-      </div>
-      
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text">With textarea</span>
-        </div>
-        <textarea class="form-control" aria-label="With textarea"></textarea>
-      </div>
+       -->
+    </fieldset>
+    <button type="submit" class="btn btn-primary">Insert</button>
+    {{/autoForm}}
 </template>
