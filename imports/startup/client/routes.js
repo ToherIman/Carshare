@@ -14,6 +14,30 @@ FlowRouter.route('/', {
   },
 });
 
+FlowRouter.route('/select', {
+  action() {
+    BlazeLayout.render('App_body', { main: 'select' });
+  },
+});
+
+FlowRouter.route('/add', {
+  action() {
+    BlazeLayout.render('App_body', { main: 'add' });
+  },
+});
+
+FlowRouter.route('/cars', {
+  action() {
+    BlazeLayout.render('App_body', { main: 'add' });
+  },
+});
+
+FlowRouter.route('/cars/:carId', {
+  action() {
+    BlazeLayout.render('App_body', { main: 'add' });
+  },
+});
+
 FlowRouter.notFound = {
   action() {
     BlazeLayout.render('App_body', { main: 'App_notFound' });

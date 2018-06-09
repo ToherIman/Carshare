@@ -1,3 +1,12 @@
 <template name="App_body">
-  {{> Template.dynamic template=main}}
+    <div class="container">
+        <div class="row">
+          <div class="col-sm">
+              {{> map}}
+          </div>
+          <div class="col-sm-4">
+              {{> Template.dynamic template=main}}
+          </div>
+        </div>
+      </div>
 </template>
