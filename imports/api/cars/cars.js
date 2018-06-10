@@ -17,6 +17,9 @@ Pos.allow({
 });
 
 //Books = new Mongo.Collection("books");
+
+//A car has several attributes like type, price, fueled or not, reserved, etc.
+
 Markers.attachSchema(new SimpleSchema({
   lat: {
       type: Number,
@@ -25,6 +28,10 @@ Markers.attachSchema(new SimpleSchema({
   lng: {
     type: Number,
     optional: true,
+},
+position: {
+    type: Object,
+    optional: true
 },
 user: {
     type: String,
@@ -37,7 +44,36 @@ editing: {
 },
   title: {
     type: String,
-    label: "Title",
+    label: "Model",
+    max: 200,
+    //optional: true,
+  },
+  type: {
+    type: String,
+    label: "Type",
+    max: 200,
+    //optional: true,
+  },
+  price: {
+    type: Number,
+    label: "Price",
+    max: 200,
+    //optional: true,
+  },
+  fueled: {
+    type: Boolean,
+    label: "Fueled",
+    //optional: true,
+  },
+  condition: {
+    type: String,
+    label: "Condition",
+    max: 200,
+    optional: true,
+  },
+  notes: {
+    type: String,
+    label: "Notes",
     max: 200,
     optional: true,
   },

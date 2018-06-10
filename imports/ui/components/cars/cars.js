@@ -7,7 +7,12 @@ Template.cars.onRendered(function() {
 
 Template.cars.helpers({
     cars () {
+        console.log(Markers.find().fetch());
         return Markers.find().fetch();
+    },
+    geocoding(lat, lng) {
+        let address = Meteor.call('geocodeReverse', lat, lng)
+        return address.formattedAddress;
     }
 });
 

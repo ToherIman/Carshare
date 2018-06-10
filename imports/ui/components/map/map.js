@@ -12,7 +12,6 @@ Template.map.onCreated(function() {
     Meteor.subscribe('markers.all');
     GoogleMaps.ready('map', function(map) {
         let marker;
-      
         Markers.find().observe(function () {
           let latLng = Geolocation.latLng();
           const userId = Meteor.userId();
