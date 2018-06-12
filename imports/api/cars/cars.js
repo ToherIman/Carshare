@@ -33,6 +33,10 @@ position: {
     type: Object,
     optional: true
 },
+address: {
+    type: String,
+    optional: true,
+},
 user: {
     type: String,
     optional:true,

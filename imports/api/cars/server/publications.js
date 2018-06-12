@@ -9,7 +9,7 @@ Meteor.publish('links.all', function () {
 });
 
 Meteor.publish('markers.all', function () {
-  return Markers.find();
+  return Markers.find({title: {$exists: true}});
 });
 
 Meteor.publish('books.all', function () {

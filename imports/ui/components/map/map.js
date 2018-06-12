@@ -4,13 +4,14 @@ import { Markers, Pos } from '/imports/api/cars/cars.js';
 
 var MAP_ZOOM = 15;
 
-Meteor.startup(function() {  
+Meteor.startup(function () {  
     GoogleMaps.load({'key':'AIzaSyCWhpeerNrVZ0anRiC7LdDramfX2faZELI'});
 });
 if(Meteor.isClient) {
 Template.map.onCreated(function() {  
     Meteor.subscribe('markers.all');
     GoogleMaps.ready('map', function(map) {
+      var geocoder = new google.maps.Geocoder();
         let marker;
         Markers.find().observe(function () {
           let latLng = Geolocation.latLng();
@@ -49,12 +50,26 @@ Template.map.onCreated(function() {
     
         });
     
-        google.maps.event.addListener(map.instance, 'click', function(event) {
-          const carInfo = { lat: event.latLng.lat(), 
-                            lng: event.latLng.lng(), 
-                            user: Meteor.userId() };
-          Session.set('carInfo', carInfo);
-          let marker = new google.maps.Marker({
+        google.maps.event.addListener(map.instance, 'click', async function(event) {
+          geocoder.geocode({location: {lat: event.latLng.lat(), lng: event.latLng.lng()}}, function(results, status){
+            if (status === 'OK') {
+              if (results[0]) {
+                const carInfo = { 
+                  lat: event.latLng.lat(), 
+                  lng: event.latLng.lng(), 
+                  user: Meteor.userId(),
+                  address: results[0].formatted_address
+                 };  
+                 Session.set('carInfo', carInfo);
+              } else {
+                window.alert('No results found');
+              }
+            } else {
+              window.alert('Geocoder failed due to: ' + status);
+            }
+          });
+         
+         new google.maps.Marker({
             draggable: true,
             animation: google.maps.Animation.DROP,
             position: new google.maps.LatLng(event.latLng.lat(), event.latLng.lng()),
@@ -102,10 +117,11 @@ Template.map.onCreated(function() {
               console.log('marker', marker.position.lat(), marker.position.lng());
               let selectedMarker = marker.id;
               Session.set('place', marker.id);
+              
               const carInfo = { 
                 lat: marker.position.lat(), 
                 lng: marker.position.lng(), 
-                user: Meteor.userId() 
+                user: Meteor.userId(),
                 };
               Session.set('carInfo', carInfo);
             });

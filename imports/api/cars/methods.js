@@ -13,12 +13,16 @@ Meteor.methods({
       createdAt: new Date(),
     });
   },
-  async 'geocodeReverse' (lat, lng) {
+  'geocodeReverse' (lat, lng) {
+    return 'YEs';
     check(lat, Number);
     check(lng, Number);
     let geo = new GeoCoder({
-      'key': 'AIzaSyCWhpeerNrVZ0anRiC7LdDramfX2faZELI',
+      apiKey: 'AIzaSyCWhpeerNrVZ0anRiC7LdDramfX2faZELI',
+      httpAdapter: "https",
     });
-    return geo.reverse(lat, lng);
+    const res = geo.reverse(lat, lng);
+    console.log('geocode', res);
+    return res;
   }
 });

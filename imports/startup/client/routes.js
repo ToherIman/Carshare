@@ -35,7 +35,7 @@ FlowRouter.route('/cars', {
 
 FlowRouter.route('/cars/:carId', {
   action() {
-    BlazeLayout.render('App_body', { main: 'car' });
+    BlazeLayout.render('App_body', { main: 'oneCar' });
   },
 });
 
