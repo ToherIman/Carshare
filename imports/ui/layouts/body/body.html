@@ -2,7 +2,12 @@
     <div class="container">
         {{> top}}
         <div class="row">
-            {{> Template.dynamic template=main}}
+            <div class="col-sm"> 
+                {{> map}} 
+            </div> 
+            <div class="col-sm-4"> 
+                {{> Template.dynamic template=main}} 
+            </div> 
         </div>
       </div>
 </template>
