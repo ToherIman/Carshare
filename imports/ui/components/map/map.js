@@ -5,12 +5,16 @@ import { Markers } from '/imports/api/cars/cars.js';
 let MAP_ZOOM = 15;
 let previousMarker;
 Meteor.startup(function () {  
-    GoogleMaps.load({'key':'AIzaSyCWhpeerNrVZ0anRiC7LdDramfX2faZELI'});
+    GoogleMaps.load({
+      'key':'AIzaSyCWhpeerNrVZ0anRiC7LdDramfX2faZELI',
+      'libraries': 'places'
+  });
 });
-if(Meteor.isClient) {
+
 Template.map.onCreated(function() {  
     Meteor.subscribe('markers.all');
     GoogleMaps.ready('map', function(map) {
+      
       var geocoder = new google.maps.Geocoder();
         google.maps.event.addListener(map.instance, 'click', async function(event) {
           if( previousMarker) {
@@ -95,4 +99,3 @@ Template.map.helpers({
     }
   });
 
-};
