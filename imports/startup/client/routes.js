@@ -22,6 +22,7 @@ FlowRouter.route('/select', {
 });
 
 FlowRouter.route('/add', {
+  name: 'add',
   action() {
     BlazeLayout.render('App_body', { main: 'add' });
   },
