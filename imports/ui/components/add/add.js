@@ -51,4 +51,38 @@ Template.add.helpers({
     }
   });
 
+  AutoForm.addHooks('insertCarForm', {
+    before: {
+      // Replace `formType` with the form `type` attribute to which this hook applies
+      insert: function(doc) {
+        if(doc.address) {
+          if(Session.get('carInfo')) {
+            doc.lat = Session.get('carInfo').lat;
+            doc.lng = Session.get('carInfo').lng;
+          } else {
+            Bert.alert({ 
+              title: 'Error', 
+              message: 'Click on map to mark car position', 
+              style:'fixed-top', 
+              type: 'danger', 
+          });
+          }
+        } else {
+          Bert.alert({ 
+            title: 'Error', 
+            message: 'Address is required', 
+            style:'fixed-top', 
+            type: 'danger', 
+          }); 
+        }
+        return doc;
+        // Then return it or pass it to this.result()
+        //return doc; (synchronous)
+        //return false; (synchronous, cancel)
+        //this.result(doc); (asynchronous)
+        //this.result(false); (asynchronous, cancel)
+      }
+    },
+  });
+
   //something

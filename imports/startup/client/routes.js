@@ -15,9 +15,9 @@ FlowRouter.route('/', {
   },
 });
 
-FlowRouter.route('/select', {
+FlowRouter.route('/search', {
   action() {
-    BlazeLayout.render('App_body', { main: 'select' });
+    BlazeLayout.render('App_body', { main: 'search' });
   },
 });
 

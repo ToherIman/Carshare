@@ -4,6 +4,7 @@ import { Markers } from '/imports/api/cars/cars.js';
 
 let MAP_ZOOM = 15;
 let previousMarker;
+
 Meteor.startup(function () {  
     GoogleMaps.load({
       'key':'AIzaSyCWhpeerNrVZ0anRiC7LdDramfX2faZELI',
@@ -17,6 +18,7 @@ Template.map.onCreated(function() {
       
       var geocoder = new google.maps.Geocoder();
         google.maps.event.addListener(map.instance, 'click', async function(event) {
+          console.log('event', event);
           if( previousMarker) {
             previousMarker.setMap(null);
           }
@@ -50,11 +52,11 @@ Template.map.onCreated(function() {
         });
 
         var markers = {};
-        
+        console.log('m', Markers.find().fetch());
         Markers.find().observe({
           added (document) {
             let marker = new google.maps.Marker({
-              draggable: true,
+              draggable: false,
               animation: google.maps.Animation.DROP,
               position: new google.maps.LatLng(document.lat, document.lng),
               //label: "",
@@ -62,15 +64,24 @@ Template.map.onCreated(function() {
               map: map.instance,
               id: document._id
             });
-    
+
+            google.maps.event.addDomListener(marker, 'click', function() {
+              console.log('click', marker);
+              Session.set('selectedCar', document);
+              FlowRouter.go(`/cars/${document._id}`);
+            });
+            /*
             google.maps.event.addListener(marker, 'dragend', function(event) {
               Markers.update(marker.id, {$set: {lat: event.latLng.lat(), lng: event.latLng.lng()}});
             });
+            */
             markers[document._id] = marker;
           },
+          
           changed: function (newDocument, oldDocument) {
             markers[newDocument._id].setPosition({lat: newDocument.lat, lng: newDocument.lng});
           },
+          
           removed: function (oldDocument) {
             markers[oldDocument._id].setMap(null);
             google.maps.event.clearInstanceListeners(markers[oldDocument._id]);
