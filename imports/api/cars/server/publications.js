@@ -4,15 +4,7 @@ import { Meteor } from 'meteor/meteor';
 import { Links } from '../cars';
 import { Markers, Books } from '../cars';
 
-Meteor.publish('links.all', function () {
-  return Links.find();
-});
-
-Meteor.publish('markers.all', function () {
+Meteor.publish('markers.all', function (params) {
   return Markers.find({title: {$exists: true}});
-});
-
-Meteor.publish('books.all', function () {
-  return Books.find();
 });
 

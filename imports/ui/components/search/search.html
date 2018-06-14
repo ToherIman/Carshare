@@ -1,5 +1,21 @@
 <template name="search">
-   <div>
-       Search
-   </div> 
+        <div>
+          <div class="ui big transparent left icon input search" style="margin-right: 100px;">
+            <input type="text" id="searchCar" placeholder="Search Car">
+            <i class="search icon"></i>
+        </div>
+      </div>
+        <div style="overflow: auto; max-height: 80vh">
+          {{#each carList}}
+          <div class="card carCard" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">{{title}}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">Type: {{type}}</h6>
+              <p class="card-text"> <address>Adderss: {{address}}</address></p>
+              <a class="card-text">Condition: {{condition}}</a>
+              <p clpss="card-text">Price: {{price}}</p>
+            </div>
+          </div>
+          {{/each}}
+        </div>
 </template>

@@ -15,7 +15,21 @@ Meteor.startup(function () {
 Template.map.onCreated(function() {  
     Meteor.subscribe('markers.all');
     GoogleMaps.ready('map', function(map) {
-      
+      Tracker.autorun(function() {
+        const car = Session.get('selectedCar');
+        if (car) {
+          map.instance.setCenter({ lat: car.lat, lng: car.lng });
+          previousMarker = new google.maps.Marker({
+            draggable: true,
+            animation: google.maps.Animation.DROP,
+            position: new google.maps.LatLng(car.lat, car.lng),
+            //label: "Add Car",
+            icon: 'img/car.png',
+            map: map.instance,
+            id: document._id
+          });
+        }
+       });
       var geocoder = new google.maps.Geocoder();
         google.maps.event.addListener(map.instance, 'click', async function(event) {
           console.log('event', event);

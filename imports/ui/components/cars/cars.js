@@ -9,10 +9,6 @@ Template.cars.helpers({
     cars () {
         return Markers.find().fetch();
     },
-    geocoding(lat, lng) {
-        //let address = Meteor.call('geocodeReverse', lat, lng)
-        return lat+lng;
-    }
 });
 
 Template.cars.events({

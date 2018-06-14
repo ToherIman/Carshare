@@ -1,23 +1,14 @@
 <template name="oneCar">
-    <div>
-        <div>
-            {{selectedCar.title}}
+        <div class="card carCard" style="width: 18rem;">
+                <div class="card-body">
+                  <h5 class="card-title">{{selectedCar.title}}</h5>
+                  <h6 class="card-subtitle mb-2 text-muted">Type: {{selectedCar.type}}</h6>
+                  <p class="card-text"> <address>Adderss: {{selectedCar.address}}</address></p>
+                  <a class="card-text">Condition: {{selectedCar.condition}}</a>
+                  <p clpss="card-text">Price: {{selectedCar.price}}</p>
+                  <p clpss="card-text">Notes: {{selectedCar.notes}}</p>
+                  <p clpss="card-text">Fueled: {{selectedCar.fueled}}</p>
+                </div>
         </div>
-        <div>
-            {{selectedCar.type}}
-        </div>
-        <div>
-            {{selectedCar.price}}
-        </div>
-        <div>
-            {{selectedCar.condition}}
-        </div>
-        <div>
-            {{selectedCar.notes}}
-        </div>
-        <div>
-            {{selectedCar.fueled}}
-        </div>
-    </div>
     <button>Select</button>
 </template>

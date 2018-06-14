@@ -24,5 +24,6 @@ Meteor.methods({
     const res = geo.reverse(lat, lng);
     console.log('geocode', res);
     return res;
-  }
+  },
+  
 });
